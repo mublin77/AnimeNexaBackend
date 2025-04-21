@@ -1,0 +1,75 @@
+2025-04-19 07:28:46.584 +01:00 [INF] Executed DbCommand (119ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2025-04-19 07:28:46.641 +01:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-04-19 07:28:46.696 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2025-04-19 07:28:46.745 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2025-04-19 07:28:46.746 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-04-19 07:28:46.760 +01:00 [INF] Applying migration '20250419062833_InitialCreate2.o'.
+2025-04-19 07:28:46.834 +01:00 [ERR] Failed executing DbCommand (27ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_UserProfiles_Username" ON "UserProfiles" ("Username");
+2025-04-19 07:31:25.669 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-19 07:31:25.834 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-19 07:31:25.838 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-19 07:31:25.940 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-19 07:31:25.943 +01:00 [INF] Hosting environment: Development
+2025-04-19 07:31:25.944 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-19 07:31:26.451 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-19 07:31:26.613 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 163.4065ms
+2025-04-19 07:31:26.619 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-19 07:31:26.619 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-19 07:31:26.619 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-19 07:31:26.633 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 14.3888ms
+2025-04-19 07:31:26.634 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 15.4722ms
+2025-04-19 07:31:26.664 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 45.0076ms
+2025-04-19 07:31:26.713 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-19 07:31:26.733 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 19.7778ms
+2025-04-19 07:31:32.877 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-19 07:31:33.036 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-19 07:31:33.039 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-19 07:31:33.178 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-19 07:31:33.271 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-19 07:31:33.275 +01:00 [INF] Hosting environment: Development
+2025-04-19 07:31:33.277 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-19 07:31:33.347 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 169.7851ms
+2025-04-19 07:31:33.351 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-19 07:31:33.351 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-19 07:31:33.351 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-19 07:31:33.370 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 18.5204ms
+2025-04-19 07:31:33.372 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 20.8596ms
+2025-04-19 07:31:33.390 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 38.871ms
+2025-04-19 07:31:33.424 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-19 07:31:33.442 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 17.7034ms
+2025-04-19 07:32:05.156 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-19 07:32:05.168 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 11.7561ms
+2025-04-19 07:32:05.178 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-19 07:32:05.178 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-19 07:32:05.179 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-19 07:32:05.183 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 4.5766ms
+2025-04-19 07:32:05.187 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 8.945ms
+2025-04-19 07:32:05.203 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 24.3075ms
+2025-04-19 07:32:05.276 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-19 07:32:05.290 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 14.066ms
+2025-04-19 07:34:23.432 +01:00 [INF] Application is shutting down...

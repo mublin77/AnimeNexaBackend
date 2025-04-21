@@ -1,0 +1,800 @@
+2025-04-20 18:24:26.446 +01:00 [INF] Executed DbCommand (45ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2025-04-20 18:24:26.490 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-04-20 18:24:26.536 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2025-04-20 18:24:26.571 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2025-04-20 18:24:26.571 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-04-20 18:24:26.588 +01:00 [INF] Applying migration '20250420172414_InitialCreatePostContent'.
+2025-04-20 18:24:26.659 +01:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Posts" (
+    "Id" text NOT NULL,
+    "UserId" text NOT NULL,
+    "Text" text NOT NULL,
+    "MediaUrl" text NOT NULL,
+    "MediaType" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "UpdatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_Posts" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Posts_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-04-20 18:24:26.663 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Comments" (
+    "Id" text NOT NULL,
+    "UserId" text NOT NULL,
+    "PostId" text NOT NULL,
+    "Content" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "UpdatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_Comments" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Comments_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_Comments_Posts_PostId" FOREIGN KEY ("PostId") REFERENCES "Posts" ("Id") ON DELETE CASCADE
+);
+2025-04-20 18:24:26.667 +01:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Likes" (
+    "Id" text NOT NULL,
+    "UserId" text NOT NULL,
+    "PostId" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_Likes" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Likes_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_Likes_Posts_PostId" FOREIGN KEY ("PostId") REFERENCES "Posts" ("Id") ON DELETE CASCADE
+);
+2025-04-20 18:24:26.673 +01:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Shares" (
+    "Id" text NOT NULL,
+    "UserId" text NOT NULL,
+    "PostId" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_Shares" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Shares_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_Shares_Posts_PostId" FOREIGN KEY ("PostId") REFERENCES "Posts" ("Id") ON DELETE CASCADE
+);
+2025-04-20 18:24:26.675 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Comments_PostId" ON "Comments" ("PostId");
+2025-04-20 18:24:26.676 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Comments_UserId" ON "Comments" ("UserId");
+2025-04-20 18:24:26.677 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Likes_PostId" ON "Likes" ("PostId");
+2025-04-20 18:24:26.679 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Likes_UserId" ON "Likes" ("UserId");
+2025-04-20 18:24:26.680 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Posts_UserId" ON "Posts" ("UserId");
+2025-04-20 18:24:26.681 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Shares_PostId" ON "Shares" ("PostId");
+2025-04-20 18:24:26.683 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Shares_UserId" ON "Shares" ("UserId");
+2025-04-20 18:24:26.683 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250420172414_InitialCreatePostContent', '8.0.8');
+2025-04-20 19:30:23.613 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-20 19:30:23.858 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-20 19:30:23.862 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-20 19:30:23.967 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-20 19:30:23.970 +01:00 [INF] Hosting environment: Development
+2025-04-20 19:30:23.972 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-20 19:30:24.473 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-20 19:30:24.652 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 180.9768ms
+2025-04-20 19:30:24.661 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-20 19:30:24.661 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-20 19:30:24.661 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-20 19:30:24.673 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 11.582ms
+2025-04-20 19:30:24.674 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 12.8726ms
+2025-04-20 19:30:24.708 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 46.6635ms
+2025-04-20 19:30:24.903 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-20 19:30:24.924 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 20.6348ms
+2025-04-20 19:30:32.975 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-20 19:30:32.993 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 18.043ms
+2025-04-20 19:30:33.004 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-20 19:30:33.005 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-20 19:30:33.005 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-20 19:30:33.010 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 5.4641ms
+2025-04-20 19:30:33.018 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 13.4654ms
+2025-04-20 19:30:33.025 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 20.0795ms
+2025-04-20 19:30:33.120 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-20 19:30:33.136 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 16.2636ms
+2025-04-20 19:31:06.850 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7227/api/Post - multipart/form-data; boundary=----WebKitFormBoundaryaXgL0WJOa8CLQTOG 405419
+2025-04-20 19:31:06.866 +01:00 [INF] CORS policy execution failed.
+2025-04-20 19:31:06.869 +01:00 [INF] Request origin https://localhost:7227 does not have permission to access the resource.
+2025-04-20 19:31:06.905 +01:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-04-20 19:31:06.912 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2025-04-20 19:31:06.917 +01:00 [INF] HTTP POST /api/Post responded 401 in 53.1414 ms
+2025-04-20 19:31:06.921 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7227/api/Post - 401 0 null 70.7659ms
+2025-04-20 19:41:23.793 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/UserProfile/undefined - null null
+2025-04-20 19:41:23.818 +01:00 [INF] CORS policy execution successful.
+2025-04-20 19:41:23.837 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 19:41:23.936 +01:00 [INF] Route matched with {action = "GetProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile(System.String) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 19:41:25.399 +01:00 [INF] Executed DbCommand (52ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 19:41:25.426 +01:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2025-04-20 19:41:25.432 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/UserProfile/undefined - null null
+2025-04-20 19:41:25.434 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API) in 1485.89ms
+2025-04-20 19:41:25.436 +01:00 [INF] CORS policy execution successful.
+2025-04-20 19:41:25.438 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 19:41:25.439 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 19:41:25.440 +01:00 [INF] HTTP GET /api/UserProfile/undefined responded 404 in 1624.0367 ms
+2025-04-20 19:41:25.441 +01:00 [INF] Route matched with {action = "GetProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile(System.String) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 19:41:25.449 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/UserProfile/undefined - 404 null text/plain; charset=utf-8 1655.982ms
+2025-04-20 19:41:25.466 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 19:41:25.470 +01:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2025-04-20 19:41:25.472 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API) in 25.8988ms
+2025-04-20 19:41:25.474 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 19:41:25.475 +01:00 [INF] HTTP GET /api/UserProfile/undefined responded 404 in 39.5231 ms
+2025-04-20 19:41:25.477 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/UserProfile/undefined - 404 null text/plain; charset=utf-8 45.0187ms
+2025-04-20 19:43:55.982 +01:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7227/api/Auth/login - null null
+2025-04-20 19:43:56.000 +01:00 [INF] CORS policy execution successful.
+2025-04-20 19:43:56.010 +01:00 [INF] HTTP OPTIONS /api/Auth/login responded 204 in 9.3164 ms
+2025-04-20 19:43:56.023 +01:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7227/api/Auth/login - 204 null null 40.5684ms
+2025-04-20 19:43:56.027 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7227/api/Auth/login - application/json 56
+2025-04-20 19:43:56.045 +01:00 [INF] CORS policy execution successful.
+2025-04-20 19:43:56.047 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.Login (AnimeApp.API)'
+2025-04-20 19:43:56.054 +01:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AnimeApp.Core.Models.LoginModel) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-20 19:43:56.088 +01:00 [INF] Login called: Email=mubleen99@gmail.com
+2025-04-20 19:43:56.163 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-04-20 19:43:56.350 +01:00 [INF] Executed DbCommand (5ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-04-20 19:43:56.482 +01:00 [INF] Executed DbCommand (7ms) [Parameters=[@p0='?', @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-04-20 19:43:56.493 +01:00 [INF] User logged in successfully: mubleen99@gmail.com
+2025-04-20 19:43:56.496 +01:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType6`4[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-04-20 19:43:56.506 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.Login (AnimeApp.API) in 449.5594ms
+2025-04-20 19:43:56.509 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.Login (AnimeApp.API)'
+2025-04-20 19:43:56.510 +01:00 [INF] HTTP POST /api/Auth/login responded 200 in 465.0280 ms
+2025-04-20 19:43:56.513 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7227/api/Auth/login - 200 null application/json; charset=utf-8 485.9284ms
+2025-04-20 19:43:56.522 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 19:43:56.526 +01:00 [INF] CORS policy execution successful.
+2025-04-20 19:43:56.527 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 19:43:56.529 +01:00 [INF] Route matched with {action = "GetProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile(System.String) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 19:43:56.535 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 19:43:56.576 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.UserProfileDto'.
+2025-04-20 19:43:56.584 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API) in 51.8965ms
+2025-04-20 19:43:56.586 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 19:43:56.587 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 19:43:56.591 +01:00 [INF] CORS policy execution successful.
+2025-04-20 19:43:56.592 +01:00 [INF] HTTP GET /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 200 in 66.2194 ms
+2025-04-20 19:43:56.593 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 19:43:56.595 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 200 null application/json; charset=utf-8 73.4121ms
+2025-04-20 19:43:56.597 +01:00 [INF] Route matched with {action = "GetProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile(System.String) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 19:43:56.607 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 19:43:56.613 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.UserProfileDto'.
+2025-04-20 19:43:56.615 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API) in 10.2416ms
+2025-04-20 19:43:56.617 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 19:43:56.620 +01:00 [INF] HTTP GET /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 200 in 28.3438 ms
+2025-04-20 19:43:56.624 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 200 null application/json; charset=utf-8 38.2856ms
+2025-04-20 19:50:30.349 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-20 19:50:30.494 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-20 19:50:30.498 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-20 19:50:30.594 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-20 19:50:30.597 +01:00 [INF] Hosting environment: Development
+2025-04-20 19:50:30.599 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-20 19:50:31.013 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-20 19:50:31.172 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 163.1696ms
+2025-04-20 19:50:31.181 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-20 19:50:31.181 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-20 19:50:31.181 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-20 19:50:31.202 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 20.2939ms
+2025-04-20 19:50:31.203 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 22.296ms
+2025-04-20 19:50:31.223 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 42.3243ms
+2025-04-20 19:50:31.412 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-20 19:50:31.434 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 22.5062ms
+2025-04-20 19:52:19.170 +01:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7227/api/post - null null
+2025-04-20 19:52:19.188 +01:00 [INF] CORS policy execution successful.
+2025-04-20 19:52:19.194 +01:00 [INF] HTTP OPTIONS /api/post responded 204 in 7.8108 ms
+2025-04-20 19:52:19.199 +01:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7227/api/post - 204 null null 28.6676ms
+2025-04-20 19:52:19.202 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7227/api/post - multipart/form-data; boundary=----WebKitFormBoundaryVB4A5YHNd9AAZUCF 3003
+2025-04-20 19:52:19.210 +01:00 [INF] CORS policy execution successful.
+2025-04-20 19:52:19.313 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.PostController.CreatePost (AnimeApp.API)'
+2025-04-20 19:52:19.343 +01:00 [INF] Route matched with {action = "CreatePost", controller = "Post"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreatePost(AnimeApp.Core.Dtos.CreatePostDto, Microsoft.AspNetCore.Http.IFormFile) on controller AnimeApp.API.Controllers.PostController (AnimeApp.API).
+2025-04-20 19:52:25.301 +01:00 [ERR] Failed executing DbCommand (78ms) [Parameters=[@p0='?', @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?', @p5='?' (DbType = DateTime), @p6='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Posts" ("Id", "CreatedAt", "MediaType", "MediaUrl", "Text", "UpdatedAt", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2025-04-20 19:52:25.330 +01:00 [ERR] An exception occurred in the database while saving changes for context type 'AnimeApp.Infrastructure.Data.Context.AnimeAppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "Posts" violates foreign key constraint "FK_Posts_AspNetUsers_UserId"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "Posts" violates foreign key constraint "FK_Posts_AspNetUsers_UserId"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: Posts
+    ConstraintName: FK_Posts_AspNetUsers_UserId
+    File: ri_triggers.c
+    Line: 2610
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "Posts" violates foreign key constraint "FK_Posts_AspNetUsers_UserId"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "Posts" violates foreign key constraint "FK_Posts_AspNetUsers_UserId"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: Posts
+    ConstraintName: FK_Posts_AspNetUsers_UserId
+    File: ri_triggers.c
+    Line: 2610
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2025-04-20 19:52:25.350 +01:00 [INF] Executed action AnimeApp.API.Controllers.PostController.CreatePost (AnimeApp.API) in 5999.0462ms
+2025-04-20 19:52:25.352 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.PostController.CreatePost (AnimeApp.API)'
+2025-04-20 19:52:25.354 +01:00 [ERR] HTTP POST /api/post responded 500 in 6144.1242 ms
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "Posts" violates foreign key constraint "FK_Posts_AspNetUsers_UserId"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "Posts" violates foreign key constraint "FK_Posts_AspNetUsers_UserId"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: Posts
+    ConstraintName: FK_Posts_AspNetUsers_UserId
+    File: ri_triggers.c
+    Line: 2610
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at AnimeApp.Infrastructure.Repositories.PostRepository.CreatePostAsync(Post post) in C:\Users\ctrl-f2-dev-1\project\AnimeApp.Infrastructure\Data\Repositories\PostRepository.cs:line 21
+   at AnimeApp.Core.Services.PostService.CreatePostAsync(String userId, CreatePostDto model, String mediaUrl, String mediaType) in C:\Users\ctrl-f2-dev-1\project\AnimeApp.Infrastructure\Services\PostService.cs:line 32
+   at AnimeApp.API.Controllers.PostController.CreatePost(CreatePostDto model, IFormFile media) in C:\Users\ctrl-f2-dev-1\project\AnimeApp.API\Controllers\PostController.cs:line 60
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-04-20 19:52:25.396 +01:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "Posts" violates foreign key constraint "FK_Posts_AspNetUsers_UserId"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "Posts" violates foreign key constraint "FK_Posts_AspNetUsers_UserId"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: Posts
+    ConstraintName: FK_Posts_AspNetUsers_UserId
+    File: ri_triggers.c
+    Line: 2610
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at AnimeApp.Infrastructure.Repositories.PostRepository.CreatePostAsync(Post post) in C:\Users\ctrl-f2-dev-1\project\AnimeApp.Infrastructure\Data\Repositories\PostRepository.cs:line 21
+   at AnimeApp.Core.Services.PostService.CreatePostAsync(String userId, CreatePostDto model, String mediaUrl, String mediaType) in C:\Users\ctrl-f2-dev-1\project\AnimeApp.Infrastructure\Services\PostService.cs:line 32
+   at AnimeApp.API.Controllers.PostController.CreatePost(CreatePostDto model, IFormFile media) in C:\Users\ctrl-f2-dev-1\project\AnimeApp.API\Controllers\PostController.cs:line 60
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-04-20 19:52:25.423 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7227/api/post - 500 null text/plain; charset=utf-8 6221.7508ms
+2025-04-20 20:27:39.666 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-20 20:27:39.808 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-20 20:27:39.812 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-20 20:27:39.906 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-20 20:27:39.910 +01:00 [INF] Hosting environment: Development
+2025-04-20 20:27:39.911 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-20 20:27:40.310 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-20 20:27:40.567 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 256.022ms
+2025-04-20 20:27:40.577 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-20 20:27:40.577 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-20 20:27:40.577 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-20 20:27:40.623 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 46.2762ms
+2025-04-20 20:27:40.624 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 47.2813ms
+2025-04-20 20:27:40.640 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 63.3875ms
+2025-04-20 20:27:40.718 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-20 20:27:40.738 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 19.6174ms
+2025-04-20 20:28:02.671 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 20:28:02.684 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:28:02.715 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:02.745 +01:00 [INF] Route matched with {action = "GetProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile(System.String) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 20:28:04.062 +01:00 [INF] Executed DbCommand (57ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 20:28:04.252 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.UserProfileDto'.
+2025-04-20 20:28:04.269 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 20:28:04.271 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API) in 1518.2561ms
+2025-04-20 20:28:04.276 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:28:04.277 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:04.280 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:04.283 +01:00 [INF] Route matched with {action = "GetProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile(System.String) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 20:28:04.283 +01:00 [INF] HTTP GET /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 200 in 1600.9842 ms
+2025-04-20 20:28:04.295 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 200 null application/json; charset=utf-8 1623.8379ms
+2025-04-20 20:28:04.310 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 20:28:04.315 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.UserProfileDto'.
+2025-04-20 20:28:04.317 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API) in 32.3147ms
+2025-04-20 20:28:04.320 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:04.321 +01:00 [INF] HTTP GET /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 200 in 45.9642 ms
+2025-04-20 20:28:04.325 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 200 null application/json; charset=utf-8 55.9923ms
+2025-04-20 20:28:06.488 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 20:28:06.507 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:28:06.524 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:06.531 +01:00 [INF] Route matched with {action = "GetProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile(System.String) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 20:28:06.672 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 20:28:06.677 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.UserProfileDto'.
+2025-04-20 20:28:06.679 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API) in 135.1933ms
+2025-04-20 20:28:06.681 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 20:28:06.681 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:06.686 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:28:06.688 +01:00 [INF] HTTP GET /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 200 in 181.5556 ms
+2025-04-20 20:28:06.689 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:06.691 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 200 null application/json; charset=utf-8 203.7036ms
+2025-04-20 20:28:06.693 +01:00 [INF] Route matched with {action = "GetProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile(System.String) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 20:28:06.703 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 20:28:06.707 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.UserProfileDto'.
+2025-04-20 20:28:06.709 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API) in 8.652ms
+2025-04-20 20:28:06.712 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:06.713 +01:00 [INF] HTTP GET /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 200 in 27.1173 ms
+2025-04-20 20:28:06.716 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 200 null application/json; charset=utf-8 34.7562ms
+2025-04-20 20:28:13.841 +01:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 20:28:13.861 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:28:13.869 +01:00 [INF] HTTP OPTIONS /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 204 in 8.3094 ms
+2025-04-20 20:28:13.881 +01:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 204 null null 39.9218ms
+2025-04-20 20:28:13.887 +01:00 [INF] Request starting HTTP/2 PUT https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - application/json 279
+2025-04-20 20:28:13.920 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:28:14.029 +01:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '4/20/2025 7:13:56 PM', Current time (UTC): '4/20/2025 7:28:14 PM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-04-20 20:28:14.040 +01:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '4/20/2025 7:13:56 PM', Current time (UTC): '4/20/2025 7:28:14 PM'.
+2025-04-20 20:28:14.045 +01:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-04-20 20:28:14.049 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2025-04-20 20:28:14.051 +01:00 [INF] HTTP PUT /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 401 in 130.1840 ms
+2025-04-20 20:28:14.053 +01:00 [INF] Request finished HTTP/2 PUT https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 401 0 null 165.7437ms
+2025-04-20 20:28:30.222 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 20:28:30.239 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:28:30.245 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:30.252 +01:00 [INF] Route matched with {action = "GetProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile(System.String) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 20:28:30.271 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 20:28:30.285 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.UserProfileDto'.
+2025-04-20 20:28:30.295 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API) in 31.137ms
+2025-04-20 20:28:30.299 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 20:28:30.303 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:30.322 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:28:30.330 +01:00 [INF] HTTP GET /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 200 in 90.5903 ms
+2025-04-20 20:28:30.335 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:30.348 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 200 null application/json; charset=utf-8 126.3104ms
+2025-04-20 20:28:30.355 +01:00 [INF] Route matched with {action = "GetProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile(System.String) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 20:28:30.385 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 20:28:30.389 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.UserProfileDto'.
+2025-04-20 20:28:30.391 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API) in 8.3548ms
+2025-04-20 20:28:30.393 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:30.394 +01:00 [INF] HTTP GET /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 200 in 72.4820 ms
+2025-04-20 20:28:30.398 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 200 null application/json; charset=utf-8 98.039ms
+2025-04-20 20:28:45.188 +01:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7227/api/Auth/login - null null
+2025-04-20 20:28:45.204 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:28:45.209 +01:00 [INF] HTTP OPTIONS /api/Auth/login responded 204 in 5.3016 ms
+2025-04-20 20:28:45.222 +01:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7227/api/Auth/login - 204 null null 33.7444ms
+2025-04-20 20:28:45.226 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7227/api/Auth/login - application/json 56
+2025-04-20 20:28:45.263 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:28:45.269 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.Login (AnimeApp.API)'
+2025-04-20 20:28:45.293 +01:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AnimeApp.Core.Models.LoginModel) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-20 20:28:45.364 +01:00 [INF] Login called: Email=mubleen99@gmail.com
+2025-04-20 20:28:45.404 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-04-20 20:28:45.622 +01:00 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?', @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-04-20 20:28:45.633 +01:00 [INF] User logged in successfully: mubleen99@gmail.com
+2025-04-20 20:28:45.636 +01:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType6`4[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-04-20 20:28:45.642 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.Login (AnimeApp.API) in 334.08ms
+2025-04-20 20:28:45.644 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.Login (AnimeApp.API)'
+2025-04-20 20:28:45.645 +01:00 [INF] HTTP POST /api/Auth/login responded 200 in 382.8239 ms
+2025-04-20 20:28:45.648 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7227/api/Auth/login - 200 null application/json; charset=utf-8 421.9104ms
+2025-04-20 20:28:45.657 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 20:28:45.661 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:28:45.663 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:45.665 +01:00 [INF] Route matched with {action = "GetProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile(System.String) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 20:28:45.671 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 20:28:45.675 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.UserProfileDto'.
+2025-04-20 20:28:45.677 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API) in 8.0986ms
+2025-04-20 20:28:45.678 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 20:28:45.679 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:45.682 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:28:45.684 +01:00 [INF] HTTP GET /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 200 in 22.8649 ms
+2025-04-20 20:28:45.685 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:45.689 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 200 null application/json; charset=utf-8 32.066ms
+2025-04-20 20:28:45.690 +01:00 [INF] Route matched with {action = "GetProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile(System.String) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 20:28:45.699 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 20:28:45.702 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.UserProfileDto'.
+2025-04-20 20:28:45.705 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API) in 7.362ms
+2025-04-20 20:28:45.706 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:45.708 +01:00 [INF] HTTP GET /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 200 in 25.2770 ms
+2025-04-20 20:28:45.710 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 200 null application/json; charset=utf-8 31.8975ms
+2025-04-20 20:28:47.253 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 20:28:47.270 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:28:47.276 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:47.283 +01:00 [INF] Route matched with {action = "GetProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile(System.String) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 20:28:47.300 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 20:28:47.317 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.UserProfileDto'.
+2025-04-20 20:28:47.326 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API) in 30.4465ms
+2025-04-20 20:28:47.330 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 20:28:47.335 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:47.354 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:28:47.361 +01:00 [INF] HTTP GET /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 200 in 91.4719 ms
+2025-04-20 20:28:47.368 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:47.381 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 200 null application/json; charset=utf-8 127.6001ms
+2025-04-20 20:28:47.388 +01:00 [INF] Route matched with {action = "GetProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile(System.String) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 20:28:47.425 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 20:28:47.442 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.UserProfileDto'.
+2025-04-20 20:28:47.451 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API) in 30.5796ms
+2025-04-20 20:28:47.459 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:28:47.466 +01:00 [INF] HTTP GET /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 200 in 112.7660 ms
+2025-04-20 20:28:47.477 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 200 null application/json; charset=utf-8 146.8312ms
+2025-04-20 20:28:50.433 +01:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 20:28:50.451 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:28:50.456 +01:00 [INF] HTTP OPTIONS /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 204 in 5.3123 ms
+2025-04-20 20:28:50.469 +01:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 204 null null 35.806ms
+2025-04-20 20:28:50.474 +01:00 [INF] Request starting HTTP/2 PUT https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - application/json 283
+2025-04-20 20:28:50.504 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:28:50.519 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.UpdateProfile (AnimeApp.API)'
+2025-04-20 20:28:50.528 +01:00 [INF] Route matched with {action = "UpdateProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdateProfile(System.String, AnimeApp.Core.Dtos.UpdateUserProfileDto) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 20:28:50.543 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 20:28:50.549 +01:00 [INF] Executing ForbidResult with authentication schemes (["You can only update your own profile."]).
+2025-04-20 20:28:50.555 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.UpdateProfile (AnimeApp.API) in 23.0646ms
+2025-04-20 20:28:50.556 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.UpdateProfile (AnimeApp.API)'
+2025-04-20 20:28:50.558 +01:00 [ERR] HTTP PUT /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 500 in 53.5034 ms
+System.InvalidOperationException: No authentication handler is registered for the scheme 'You can only update your own profile.'. The registered schemes are: Identity.Application, Identity.External, Identity.TwoFactorRememberMe, Identity.TwoFactorUserId, Bearer, Google. Did you forget to call AddAuthentication().Add[SomeAuthHandler]("You can only update your own profile.",...)?
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.ForbidAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Mvc.ForbidResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-04-20 20:28:50.566 +01:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: No authentication handler is registered for the scheme 'You can only update your own profile.'. The registered schemes are: Identity.Application, Identity.External, Identity.TwoFactorRememberMe, Identity.TwoFactorUserId, Bearer, Google. Did you forget to call AddAuthentication().Add[SomeAuthHandler]("You can only update your own profile.",...)?
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.ForbidAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Mvc.ForbidResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-04-20 20:28:50.575 +01:00 [INF] Request finished HTTP/2 PUT https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 500 null text/plain; charset=utf-8 101.6992ms
+2025-04-20 20:30:05.814 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-20 20:30:05.983 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-20 20:30:05.987 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-20 20:30:06.082 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-20 20:30:06.086 +01:00 [INF] Hosting environment: Development
+2025-04-20 20:30:06.087 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-20 20:30:06.469 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-20 20:30:06.628 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 160.2717ms
+2025-04-20 20:30:06.636 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-20 20:30:06.636 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-20 20:30:06.636 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-20 20:30:06.644 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 7.645ms
+2025-04-20 20:30:06.658 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 21.8374ms
+2025-04-20 20:30:06.675 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 38.762ms
+2025-04-20 20:30:06.740 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-20 20:30:06.759 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 18.7171ms
+2025-04-20 20:30:25.004 +01:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 20:30:25.042 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:30:25.057 +01:00 [INF] HTTP OPTIONS /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 204 in 22.9556 ms
+2025-04-20 20:30:25.074 +01:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 204 null null 69.8318ms
+2025-04-20 20:30:25.080 +01:00 [INF] Request starting HTTP/2 PUT https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - application/json 295
+2025-04-20 20:30:25.120 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:30:25.258 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.UpdateProfile (AnimeApp.API)'
+2025-04-20 20:30:25.284 +01:00 [INF] Route matched with {action = "UpdateProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdateProfile(System.String, AnimeApp.Core.Dtos.UpdateUserProfileDto) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 20:30:26.479 +01:00 [INF] Executed DbCommand (52ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 20:30:26.695 +01:00 [INF] Executed DbCommand (6ms) [Parameters=[@p3='?', @p0='?', @p1='?' (DbType = Object), @p2='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserProfiles" SET "Bio" = @p0, "Links" = @p1, "UpdatedAt" = @p2
+WHERE "Id" = @p3;
+2025-04-20 20:30:26.715 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.UserProfileDto'.
+2025-04-20 20:30:26.730 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.UpdateProfile (AnimeApp.API) in 1438.8967ms
+2025-04-20 20:30:26.734 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.UpdateProfile (AnimeApp.API)'
+2025-04-20 20:30:26.738 +01:00 [INF] HTTP PUT /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 200 in 1618.9432 ms
+2025-04-20 20:30:26.748 +01:00 [INF] Request finished HTTP/2 PUT https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 200 null application/json; charset=utf-8 1668.7594ms
+2025-04-20 20:30:29.548 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 20:30:29.567 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:30:29.578 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:30:29.606 +01:00 [INF] Route matched with {action = "GetProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile(System.String) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 20:30:29.650 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 20:30:29.659 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.UserProfileDto'.
+2025-04-20 20:30:29.662 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API) in 43.9248ms
+2025-04-20 20:30:29.664 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - null null
+2025-04-20 20:30:29.665 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:30:29.669 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:30:29.671 +01:00 [INF] HTTP GET /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 200 in 104.9246 ms
+2025-04-20 20:30:29.674 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:30:29.674 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 200 null application/json; charset=utf-8 126.9633ms
+2025-04-20 20:30:29.676 +01:00 [INF] Route matched with {action = "GetProfile", controller = "UserProfile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile(System.String) on controller AnimeApp.API.Controllers.UserProfileController (AnimeApp.API).
+2025-04-20 20:30:29.779 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Links", u."ProfilePhotoUrl", u."UpdatedAt", u."UserId", u."Username", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "UserProfiles" AS u
+INNER JOIN "AspNetUsers" AS a ON u."UserId" = a."Id"
+WHERE u."UserId" = @__id_0
+LIMIT 1
+2025-04-20 20:30:29.785 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.UserProfileDto'.
+2025-04-20 20:30:29.787 +01:00 [INF] Executed action AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API) in 102.3265ms
+2025-04-20 20:30:29.789 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.UserProfileController.GetProfile (AnimeApp.API)'
+2025-04-20 20:30:29.792 +01:00 [INF] HTTP GET /api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 responded 200 in 122.6472 ms
+2025-04-20 20:30:29.794 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/UserProfile/d697ae55-3ad4-4ca2-ae51-2f3ac9f80848 - 200 null application/json; charset=utf-8 130.4595ms
+2025-04-20 20:30:42.249 +01:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7227/api/post - null null
+2025-04-20 20:30:42.267 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:30:42.272 +01:00 [INF] HTTP OPTIONS /api/post responded 204 in 5.5501 ms
+2025-04-20 20:30:42.284 +01:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7227/api/post - 204 null null 34.6954ms
+2025-04-20 20:30:42.291 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7227/api/post - multipart/form-data; boundary=----WebKitFormBoundaryq6ABC7ZYXIwTxIbz 2999
+2025-04-20 20:30:42.316 +01:00 [INF] CORS policy execution successful.
+2025-04-20 20:30:42.327 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.PostController.CreatePost (AnimeApp.API)'
+2025-04-20 20:30:42.345 +01:00 [INF] Route matched with {action = "CreatePost", controller = "Post"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreatePost(AnimeApp.Core.Dtos.CreatePostDto, Microsoft.AspNetCore.Http.IFormFile) on controller AnimeApp.API.Controllers.PostController (AnimeApp.API).
+2025-04-20 20:30:47.757 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?', @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?', @p5='?' (DbType = DateTime), @p6='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Posts" ("Id", "CreatedAt", "MediaType", "MediaUrl", "Text", "UpdatedAt", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2025-04-20 20:30:47.763 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.PostDto'.
+2025-04-20 20:30:47.768 +01:00 [INF] Executed action AnimeApp.API.Controllers.PostController.CreatePost (AnimeApp.API) in 5413.3299ms
+2025-04-20 20:30:47.770 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.PostController.CreatePost (AnimeApp.API)'
+2025-04-20 20:30:47.771 +01:00 [INF] HTTP POST /api/post responded 200 in 5455.3284 ms
+2025-04-20 20:30:47.774 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7227/api/post - 200 null application/json; charset=utf-8 5482.6936ms
+2025-04-20 20:38:02.663 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/Post/672be27d-5c49-47c2-b510-45cdbb0e2ce5 - null null
+2025-04-20 20:38:02.669 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.PostController.GetPost (AnimeApp.API)'
+2025-04-20 20:38:02.674 +01:00 [INF] Route matched with {action = "GetPost", controller = "Post"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPost(System.String) on controller AnimeApp.API.Controllers.PostController (AnimeApp.API).
+2025-04-20 20:38:02.746 +01:00 [INF] Executed DbCommand (6ms) [Parameters=[@__id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."CreatedAt", p."MediaType", p."MediaUrl", p."Text", p."UpdatedAt", p."UserId", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "Posts" AS p
+INNER JOIN "AspNetUsers" AS a ON p."UserId" = a."Id"
+WHERE p."Id" = @__id_0
+LIMIT 1
+2025-04-20 20:38:02.753 +01:00 [INF] Executing OkObjectResult, writing value of type 'AnimeApp.Core.Dtos.PostDto'.
+2025-04-20 20:38:02.754 +01:00 [INF] Executed action AnimeApp.API.Controllers.PostController.GetPost (AnimeApp.API) in 78.2241ms
+2025-04-20 20:38:02.756 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.PostController.GetPost (AnimeApp.API)'
+2025-04-20 20:38:02.758 +01:00 [INF] HTTP GET /api/Post/672be27d-5c49-47c2-b510-45cdbb0e2ce5 responded 200 in 88.9721 ms
+2025-04-20 20:38:02.760 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/Post/672be27d-5c49-47c2-b510-45cdbb0e2ce5 - 200 null application/json; charset=utf-8 96.7338ms
+2025-04-20 20:38:39.502 +01:00 [INF] Application is shutting down...
+2025-04-20 23:42:21.422 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-20 23:42:21.524 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-20 23:42:21.527 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-20 23:42:21.598 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-20 23:42:21.600 +01:00 [INF] Hosting environment: Development
+2025-04-20 23:42:21.601 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-20 23:42:22.338 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-20 23:42:22.474 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 136.8716ms
+2025-04-20 23:42:22.478 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-20 23:42:22.478 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-20 23:42:22.487 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-20 23:42:22.487 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 9.2845ms
+2025-04-20 23:42:22.493 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 14.9882ms
+2025-04-20 23:42:22.534 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 47.3206ms
+2025-04-20 23:42:22.683 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-20 23:42:22.697 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 14.1858ms

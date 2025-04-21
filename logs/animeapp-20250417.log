@@ -1,0 +1,102 @@
+2025-04-17 00:38:35.042 +01:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-04-17 00:38:35.281 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-17 00:38:35.286 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-17 00:38:35.329 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 00:38:35.333 +01:00 [INF] Hosting environment: Development
+2025-04-17 00:38:35.335 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-17 00:38:35.660 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger - null null
+2025-04-17 00:38:35.827 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger - 301 0 null 169.064ms
+2025-04-17 00:38:35.835 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 00:38:35.915 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 80.0894ms
+2025-04-17 00:38:35.922 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/swagger-ui.css - null null
+2025-04-17 00:38:35.922 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.css - null null
+2025-04-17 00:38:35.922 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/swagger-ui-bundle.js - null null
+2025-04-17 00:38:35.922 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/swagger-ui-standalone-preset.js - null null
+2025-04-17 00:38:35.922 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 00:38:35.923 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 00:38:35.942 +01:00 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2025-04-17 00:38:35.947 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 24.5315ms
+2025-04-17 00:38:35.954 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.css - 200 202 text/css 32.3756ms
+2025-04-17 00:38:35.954 +01:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-04-17 00:38:35.955 +01:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-04-17 00:38:35.956 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 32.8603ms
+2025-04-17 00:38:35.972 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/swagger-ui.css - 200 152034 text/css 50.8292ms
+2025-04-17 00:38:35.974 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/swagger-ui-standalone-preset.js - 200 230293 text/javascript 51.9097ms
+2025-04-17 00:38:35.976 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 00:38:35.981 +01:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-04-17 00:38:35.998 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/swagger-ui-bundle.js - 200 1452753 text/javascript 76.1094ms
+2025-04-17 00:38:36.048 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 72.1686ms
+2025-04-17 00:38:36.228 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 00:38:36.239 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 11.3823ms
+2025-04-17 00:38:43.381 +01:00 [INF] Application is shutting down...
+2025-04-17 00:40:49.600 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-17 00:40:49.642 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-17 00:40:49.693 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 00:40:49.696 +01:00 [INF] Hosting environment: Development
+2025-04-17 00:40:49.698 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-17 00:40:50.396 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 00:40:50.776 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 381.9858ms
+2025-04-17 00:40:50.780 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 00:40:50.780 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 00:40:50.795 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 00:40:50.798 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 18.0267ms
+2025-04-17 00:40:50.801 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 20.4876ms
+2025-04-17 00:40:50.834 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 39.0871ms
+2025-04-17 00:40:51.032 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 00:40:51.045 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 13.16ms
+2025-04-17 00:40:56.282 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/Health - null null
+2025-04-17 00:40:56.314 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.HealthController.Get (AnimeApp.API)'
+2025-04-17 00:40:56.385 +01:00 [INF] Route matched with {action = "Get", controller = "Health"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller AnimeApp.API.Controllers.HealthController (AnimeApp.API).
+2025-04-17 00:40:56.418 +01:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-04-17 00:40:56.469 +01:00 [INF] Executed action AnimeApp.API.Controllers.HealthController.Get (AnimeApp.API) in 58.2172ms
+2025-04-17 00:40:56.478 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.HealthController.Get (AnimeApp.API)'
+2025-04-17 00:40:56.486 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/Health - 200 null application/json; charset=utf-8 203.5635ms
+2025-04-17 00:41:45.948 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-17 00:41:45.999 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-17 00:41:46.045 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 00:41:46.053 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 00:41:46.056 +01:00 [INF] Hosting environment: Development
+2025-04-17 00:41:46.058 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-17 00:41:46.207 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 163.7745ms
+2025-04-17 00:41:46.211 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 00:41:46.211 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 00:41:46.211 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 00:41:46.230 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 19.142ms
+2025-04-17 00:41:46.232 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 21.6893ms
+2025-04-17 00:41:46.259 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 48.7563ms
+2025-04-17 00:41:46.319 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 00:41:46.329 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/favicon-32x32.png - null null
+2025-04-17 00:41:46.332 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 13.614ms
+2025-04-17 00:41:46.344 +01:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-04-17 00:41:46.347 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/favicon-32x32.png - 200 628 image/png 18.3341ms
+2025-04-17 00:49:23.067 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-17 00:49:23.109 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-17 00:49:23.226 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 00:49:23.230 +01:00 [INF] Hosting environment: Development
+2025-04-17 00:49:23.232 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-17 00:49:23.575 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 00:49:23.732 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 157.9315ms
+2025-04-17 00:49:23.738 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 00:49:23.738 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 00:49:23.738 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 00:49:23.749 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 11.4293ms
+2025-04-17 00:49:23.760 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 21.7155ms
+2025-04-17 00:49:23.792 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 53.7622ms
+2025-04-17 00:49:23.830 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 00:49:23.842 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 12.799ms
+2025-04-17 00:49:48.474 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-17 00:49:48.512 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-17 00:49:48.602 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 00:49:48.605 +01:00 [INF] Hosting environment: Development
+2025-04-17 00:49:48.608 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-17 00:49:48.971 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 00:49:49.120 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 150.3454ms
+2025-04-17 00:49:49.125 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 00:49:49.125 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 00:49:49.125 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 00:49:49.137 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 12.0777ms
+2025-04-17 00:49:49.148 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 23.189ms
+2025-04-17 00:49:49.173 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 47.9508ms
+2025-04-17 00:49:49.240 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 00:49:49.255 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 14.0491ms
+2025-04-17 01:05:33.610 +01:00 [INF] Application is shutting down...

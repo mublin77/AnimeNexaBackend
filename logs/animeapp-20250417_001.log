@@ -1,0 +1,1282 @@
+2025-04-17 00:49:49.251 +01:00 [ERR] An error occurred using the connection to database 'AnimeAppDb' on server 'tcp://localhost:5432'.
+2025-04-17 00:49:50.278 +01:00 [INF] Executed DbCommand (473ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE "AnimeAppDb";
+2025-04-17 00:49:50.483 +01:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-04-17 00:49:50.492 +01:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-04-17 00:49:50.495 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-04-17 00:49:50.499 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-04-17 00:49:50.515 +01:00 [INF] Applying migration '20250416234924_InitialCreate'.
+2025-04-17 00:49:50.535 +01:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Users" (
+    "Id" text NOT NULL,
+    "Email" text NOT NULL,
+    "Username" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "UpdatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_Users" PRIMARY KEY ("Id")
+);
+2025-04-17 00:49:50.544 +01:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserProfiles" (
+    "Id" text NOT NULL,
+    "UserId" text NOT NULL,
+    "Bio" text NOT NULL,
+    "ProfilePhotoUrl" text NOT NULL,
+    "Links" text[] NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "UpdatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_UserProfiles" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_UserProfiles_Users_UserId" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE
+);
+2025-04-17 00:49:50.546 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_UserProfiles_UserId" ON "UserProfiles" ("UserId");
+2025-04-17 00:49:50.547 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250416234924_InitialCreate', '9.0.4');
+2025-04-17 11:45:50.953 +01:00 [INF] Executed DbCommand (34ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2025-04-17 11:45:50.993 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-04-17 11:45:51.145 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2025-04-17 11:45:51.283 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2025-04-17 11:45:51.283 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-04-17 11:45:51.292 +01:00 [INF] Applying migration '20250417104454_InitailCreate'.
+2025-04-17 11:45:51.353 +01:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoles" (
+    "Id" text NOT NULL,
+    "Name" character varying(256),
+    "NormalizedName" character varying(256),
+    "ConcurrencyStamp" text,
+    CONSTRAINT "PK_AspNetRoles" PRIMARY KEY ("Id")
+);
+2025-04-17 11:45:51.357 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUsers" (
+    "Id" text NOT NULL,
+    "UserName" character varying(256),
+    "NormalizedUserName" character varying(256),
+    "Email" character varying(256),
+    "NormalizedEmail" character varying(256),
+    "EmailConfirmed" boolean NOT NULL,
+    "PasswordHash" text,
+    "SecurityStamp" text,
+    "ConcurrencyStamp" text,
+    "PhoneNumber" text,
+    "PhoneNumberConfirmed" boolean NOT NULL,
+    "TwoFactorEnabled" boolean NOT NULL,
+    "LockoutEnd" timestamp with time zone,
+    "LockoutEnabled" boolean NOT NULL,
+    "AccessFailedCount" integer NOT NULL,
+    CONSTRAINT "PK_AspNetUsers" PRIMARY KEY ("Id")
+);
+2025-04-17 11:45:51.360 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "RefreshTokens" (
+    "Id" text NOT NULL,
+    "UserId" text NOT NULL,
+    "Token" text NOT NULL,
+    "Expires" timestamp with time zone NOT NULL,
+    "IsRevoked" boolean NOT NULL,
+    CONSTRAINT "PK_RefreshTokens" PRIMARY KEY ("Id")
+);
+2025-04-17 11:45:51.368 +01:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoleClaims" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "RoleId" text NOT NULL,
+    "ClaimType" text,
+    "ClaimValue" text,
+    CONSTRAINT "PK_AspNetRoleClaims" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_AspNetRoleClaims_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:45:51.371 +01:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserClaims" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "UserId" text NOT NULL,
+    "ClaimType" text,
+    "ClaimValue" text,
+    CONSTRAINT "PK_AspNetUserClaims" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_AspNetUserClaims_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:45:51.375 +01:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserLogins" (
+    "LoginProvider" text NOT NULL,
+    "ProviderKey" text NOT NULL,
+    "ProviderDisplayName" text,
+    "UserId" text NOT NULL,
+    CONSTRAINT "PK_AspNetUserLogins" PRIMARY KEY ("LoginProvider", "ProviderKey"),
+    CONSTRAINT "FK_AspNetUserLogins_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:45:51.378 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserRoles" (
+    "UserId" text NOT NULL,
+    "RoleId" text NOT NULL,
+    CONSTRAINT "PK_AspNetUserRoles" PRIMARY KEY ("UserId", "RoleId"),
+    CONSTRAINT "FK_AspNetUserRoles_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_AspNetUserRoles_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:45:51.381 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserTokens" (
+    "UserId" text NOT NULL,
+    "LoginProvider" text NOT NULL,
+    "Name" text NOT NULL,
+    "Value" text,
+    CONSTRAINT "PK_AspNetUserTokens" PRIMARY KEY ("UserId", "LoginProvider", "Name"),
+    CONSTRAINT "FK_AspNetUserTokens_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:45:51.397 +01:00 [ERR] Failed executing DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserProfiles" (
+    "Id" text NOT NULL,
+    "UserId" text NOT NULL,
+    "Username" text NOT NULL,
+    "Bio" text NOT NULL,
+    "ProfilePhotoUrl" text NOT NULL,
+    "Links" text[] NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "UpdatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_UserProfiles" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_UserProfiles_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:46:26.790 +01:00 [INF] Executed DbCommand (221ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE "AnimeAppDb1";
+2025-04-17 11:46:26.944 +01:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-04-17 11:46:27.000 +01:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2025-04-17 11:46:27.003 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-04-17 11:46:27.013 +01:00 [INF] Applying migration '20250417104454_InitailCreate'.
+2025-04-17 11:46:27.051 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoles" (
+    "Id" text NOT NULL,
+    "Name" character varying(256),
+    "NormalizedName" character varying(256),
+    "ConcurrencyStamp" text,
+    CONSTRAINT "PK_AspNetRoles" PRIMARY KEY ("Id")
+);
+2025-04-17 11:46:27.054 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUsers" (
+    "Id" text NOT NULL,
+    "UserName" character varying(256),
+    "NormalizedUserName" character varying(256),
+    "Email" character varying(256),
+    "NormalizedEmail" character varying(256),
+    "EmailConfirmed" boolean NOT NULL,
+    "PasswordHash" text,
+    "SecurityStamp" text,
+    "ConcurrencyStamp" text,
+    "PhoneNumber" text,
+    "PhoneNumberConfirmed" boolean NOT NULL,
+    "TwoFactorEnabled" boolean NOT NULL,
+    "LockoutEnd" timestamp with time zone,
+    "LockoutEnabled" boolean NOT NULL,
+    "AccessFailedCount" integer NOT NULL,
+    CONSTRAINT "PK_AspNetUsers" PRIMARY KEY ("Id")
+);
+2025-04-17 11:46:27.057 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "RefreshTokens" (
+    "Id" text NOT NULL,
+    "UserId" text NOT NULL,
+    "Token" text NOT NULL,
+    "Expires" timestamp with time zone NOT NULL,
+    "IsRevoked" boolean NOT NULL,
+    CONSTRAINT "PK_RefreshTokens" PRIMARY KEY ("Id")
+);
+2025-04-17 11:46:27.063 +01:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoleClaims" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "RoleId" text NOT NULL,
+    "ClaimType" text,
+    "ClaimValue" text,
+    CONSTRAINT "PK_AspNetRoleClaims" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_AspNetRoleClaims_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:46:27.066 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserClaims" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "UserId" text NOT NULL,
+    "ClaimType" text,
+    "ClaimValue" text,
+    CONSTRAINT "PK_AspNetUserClaims" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_AspNetUserClaims_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:46:27.069 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserLogins" (
+    "LoginProvider" text NOT NULL,
+    "ProviderKey" text NOT NULL,
+    "ProviderDisplayName" text,
+    "UserId" text NOT NULL,
+    CONSTRAINT "PK_AspNetUserLogins" PRIMARY KEY ("LoginProvider", "ProviderKey"),
+    CONSTRAINT "FK_AspNetUserLogins_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:46:27.072 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserRoles" (
+    "UserId" text NOT NULL,
+    "RoleId" text NOT NULL,
+    CONSTRAINT "PK_AspNetUserRoles" PRIMARY KEY ("UserId", "RoleId"),
+    CONSTRAINT "FK_AspNetUserRoles_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_AspNetUserRoles_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:46:27.075 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserTokens" (
+    "UserId" text NOT NULL,
+    "LoginProvider" text NOT NULL,
+    "Name" text NOT NULL,
+    "Value" text,
+    CONSTRAINT "PK_AspNetUserTokens" PRIMARY KEY ("UserId", "LoginProvider", "Name"),
+    CONSTRAINT "FK_AspNetUserTokens_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:46:27.079 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserProfiles" (
+    "Id" text NOT NULL,
+    "UserId" text NOT NULL,
+    "Username" text NOT NULL,
+    "Bio" text NOT NULL,
+    "ProfilePhotoUrl" text NOT NULL,
+    "Links" text[] NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "UpdatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_UserProfiles" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_UserProfiles_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:46:27.080 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetRoleClaims_RoleId" ON "AspNetRoleClaims" ("RoleId");
+2025-04-17 11:46:27.081 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "RoleNameIndex" ON "AspNetRoles" ("NormalizedName");
+2025-04-17 11:46:27.083 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserClaims_UserId" ON "AspNetUserClaims" ("UserId");
+2025-04-17 11:46:27.084 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserLogins_UserId" ON "AspNetUserLogins" ("UserId");
+2025-04-17 11:46:27.085 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserRoles_RoleId" ON "AspNetUserRoles" ("RoleId");
+2025-04-17 11:46:27.086 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "EmailIndex" ON "AspNetUsers" ("NormalizedEmail");
+2025-04-17 11:46:27.087 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "UserNameIndex" ON "AspNetUsers" ("NormalizedUserName");
+2025-04-17 11:46:27.088 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_UserProfiles_UserId" ON "UserProfiles" ("UserId");
+2025-04-17 11:46:27.088 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250417104454_InitailCreate', '8.0.8');
+2025-04-17 11:46:27.092 +01:00 [INF] Applying migration '20250417104619_InitailCreate1'.
+2025-04-17 11:46:27.104 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250417104619_InitailCreate1', '8.0.8');
+2025-04-17 11:53:19.815 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-17 11:53:19.853 +01:00 [INF] Creating key {ac68b8b7-73a3-4fb4-901e-c760cd14c87c} with creation date 2025-04-17 10:53:19Z, activation date 2025-04-17 10:53:19Z, and expiration date 2025-07-16 10:53:19Z.
+2025-04-17 11:53:19.865 +01:00 [INF] Writing data to file 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys\key-ac68b8b7-73a3-4fb4-901e-c760cd14c87c.xml'.
+2025-04-17 11:53:19.955 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-17 11:53:19.956 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-17 11:53:19.990 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 11:53:19.992 +01:00 [INF] Hosting environment: Development
+2025-04-17 11:53:19.993 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-17 11:53:20.417 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 11:53:20.541 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 125.0567ms
+2025-04-17 11:53:20.546 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 11:53:20.546 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 11:53:20.551 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 4.7835ms
+2025-04-17 11:53:20.554 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 11:53:20.559 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 12.4813ms
+2025-04-17 11:53:20.591 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 37.682ms
+2025-04-17 11:53:20.625 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 11:53:20.631 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 5.8447ms
+2025-04-17 11:53:21.258 +01:00 [INF] Executed DbCommand (34ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 11:53:21.279 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 11:53:21.357 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?', @p1='?', @p2='?', @p3='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetRoles" ("Id", "ConcurrencyStamp", "Name", "NormalizedName")
+VALUES (@p0, @p1, @p2, @p3);
+2025-04-17 11:53:21.365 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 11:53:21.369 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 11:53:21.373 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?', @p1='?', @p2='?', @p3='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetRoles" ("Id", "ConcurrencyStamp", "Name", "NormalizedName")
+VALUES (@p0, @p1, @p2, @p3);
+2025-04-17 11:53:33.500 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7227/api/Auth/register - application/json 90
+2025-04-17 11:53:33.507 +01:00 [INF] CORS policy execution successful.
+2025-04-17 11:53:33.549 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.Register (AnimeApp.API)'
+2025-04-17 11:53:33.564 +01:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(AnimeApp.Core.Models.RegisterModel) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-17 11:53:33.695 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-04-17 11:53:33.742 +01:00 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?', @p1='?' (DbType = Int32), @p2='?', @p3='?', @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTime), @p7='?', @p8='?', @p9='?', @p10='?', @p11='?' (DbType = Boolean), @p12='?', @p13='?' (DbType = Boolean), @p14='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetUsers" ("Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2025-04-17 11:53:33.750 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-04-17 11:53:33.773 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-04-17 11:53:33.778 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-04-17 11:53:33.787 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-04-17 11:53:33.807 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?', @p1='?', @p16='?', @p2='?' (DbType = Int32), @p3='?', @p17='?', @p4='?', @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTime), @p8='?', @p9='?', @p10='?', @p11='?', @p12='?' (DbType = Boolean), @p13='?', @p14='?' (DbType = Boolean), @p15='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetUserRoles" ("RoleId", "UserId")
+VALUES (@p0, @p1);
+UPDATE "AspNetUsers" SET "AccessFailedCount" = @p2, "ConcurrencyStamp" = @p3, "Email" = @p4, "EmailConfirmed" = @p5, "LockoutEnabled" = @p6, "LockoutEnd" = @p7, "NormalizedEmail" = @p8, "NormalizedUserName" = @p9, "PasswordHash" = @p10, "PhoneNumber" = @p11, "PhoneNumberConfirmed" = @p12, "SecurityStamp" = @p13, "TwoFactorEnabled" = @p14, "UserName" = @p15
+WHERE "Id" = @p16 AND "ConcurrencyStamp" = @p17;
+2025-04-17 11:53:33.877 +01:00 [ERR] Failed executing DbCommand (39ms) [Parameters=[@p0='?', @p1='?', @p2='?' (DbType = DateTime), @p3='?' (DbType = Object), @p4='?', @p5='?' (DbType = DateTime), @p6='?', @p7='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "UserProfiles" ("Id", "Bio", "CreatedAt", "Links", "ProfilePhotoUrl", "UpdatedAt", "UserId", "Username")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2025-04-17 11:53:33.915 +01:00 [ERR] An exception occurred in the database while saving changes for context type 'AnimeApp.Infrastructure.Data.Context.AnimeAppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23502: null value in column "Bio" of relation "UserProfiles" violates not-null constraint
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23502
+    MessageText: null value in column "Bio" of relation "UserProfiles" violates not-null constraint
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: UserProfiles
+    ColumnName: Bio
+    File: execMain.c
+    Line: 1987
+    Routine: ExecConstraints
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23502: null value in column "Bio" of relation "UserProfiles" violates not-null constraint
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23502
+    MessageText: null value in column "Bio" of relation "UserProfiles" violates not-null constraint
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: UserProfiles
+    ColumnName: Bio
+    File: execMain.c
+    Line: 1987
+    Routine: ExecConstraints
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2025-04-17 11:53:33.929 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.Register (AnimeApp.API) in 360.7217ms
+2025-04-17 11:53:33.930 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.Register (AnimeApp.API)'
+2025-04-17 11:53:33.932 +01:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23502: null value in column "Bio" of relation "UserProfiles" violates not-null constraint
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23502
+    MessageText: null value in column "Bio" of relation "UserProfiles" violates not-null constraint
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: UserProfiles
+    ColumnName: Bio
+    File: execMain.c
+    Line: 1987
+    Routine: ExecConstraints
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at AnimeApp.API.Controllers.AuthController.Register(RegisterModel model) in C:\Users\ctrl-f2-dev-1\project\AnimeApp.API\Controllers\AuthController.cs:line 41
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-04-17 11:53:33.959 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7227/api/Auth/register - 500 null text/plain; charset=utf-8 458.8681ms
+2025-04-17 11:58:12.400 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-17 11:58:12.529 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-17 11:58:12.530 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-17 11:58:12.574 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 11:58:12.583 +01:00 [INF] Hosting environment: Development
+2025-04-17 11:58:12.584 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-17 11:58:12.646 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 11:58:12.753 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 107.2135ms
+2025-04-17 11:58:12.760 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 11:58:12.760 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 11:58:12.760 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 11:58:12.770 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 9.993ms
+2025-04-17 11:58:12.777 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 17.7558ms
+2025-04-17 11:58:12.789 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 28.9171ms
+2025-04-17 11:58:12.862 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 11:58:12.869 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 7.3889ms
+2025-04-17 11:58:13.456 +01:00 [ERR] An error occurred using the connection to database 'AnimeAppDb12' on server 'tcp://localhost:5432'.
+2025-04-17 11:58:13.473 +01:00 [ERR] An exception occurred while iterating over the results of a query for context type 'AnimeApp.Infrastructure.Data.Context.AnimeAppDbContext'.
+Npgsql.PostgresException (0x80004005): 3D000: database "AnimeAppDb12" does not exist
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|213_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken, Boolean isFirstAttempt)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: FATAL
+    SqlState: 3D000
+    MessageText: database "AnimeAppDb12" does not exist
+    File: postinit.c
+    Line: 1033
+    Routine: InitPostgres
+Npgsql.PostgresException (0x80004005): 3D000: database "AnimeAppDb12" does not exist
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|213_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken, Boolean isFirstAttempt)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: FATAL
+    SqlState: 3D000
+    MessageText: database "AnimeAppDb12" does not exist
+    File: postinit.c
+    Line: 1033
+    Routine: InitPostgres
+2025-04-17 11:58:18.609 +01:00 [INF] Executed DbCommand (197ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE "AnimeAppDb12";
+2025-04-17 11:58:18.776 +01:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-04-17 11:58:18.830 +01:00 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2025-04-17 11:58:18.833 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-04-17 11:58:18.842 +01:00 [INF] Applying migration '20250417105813_InitailCreate1'.
+2025-04-17 11:58:18.883 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoles" (
+    "Id" text NOT NULL,
+    "Name" character varying(256),
+    "NormalizedName" character varying(256),
+    "ConcurrencyStamp" text,
+    CONSTRAINT "PK_AspNetRoles" PRIMARY KEY ("Id")
+);
+2025-04-17 11:58:18.886 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUsers" (
+    "Id" text NOT NULL,
+    "UserName" character varying(256),
+    "NormalizedUserName" character varying(256),
+    "Email" character varying(256),
+    "NormalizedEmail" character varying(256),
+    "EmailConfirmed" boolean NOT NULL,
+    "PasswordHash" text,
+    "SecurityStamp" text,
+    "ConcurrencyStamp" text,
+    "PhoneNumber" text,
+    "PhoneNumberConfirmed" boolean NOT NULL,
+    "TwoFactorEnabled" boolean NOT NULL,
+    "LockoutEnd" timestamp with time zone,
+    "LockoutEnabled" boolean NOT NULL,
+    "AccessFailedCount" integer NOT NULL,
+    CONSTRAINT "PK_AspNetUsers" PRIMARY KEY ("Id")
+);
+2025-04-17 11:58:18.889 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "RefreshTokens" (
+    "Id" text NOT NULL,
+    "UserId" text NOT NULL,
+    "Token" text NOT NULL,
+    "Expires" timestamp with time zone NOT NULL,
+    "IsRevoked" boolean NOT NULL,
+    CONSTRAINT "PK_RefreshTokens" PRIMARY KEY ("Id")
+);
+2025-04-17 11:58:18.895 +01:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoleClaims" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "RoleId" text NOT NULL,
+    "ClaimType" text,
+    "ClaimValue" text,
+    CONSTRAINT "PK_AspNetRoleClaims" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_AspNetRoleClaims_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:58:18.898 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserClaims" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "UserId" text NOT NULL,
+    "ClaimType" text,
+    "ClaimValue" text,
+    CONSTRAINT "PK_AspNetUserClaims" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_AspNetUserClaims_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:58:18.901 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserLogins" (
+    "LoginProvider" text NOT NULL,
+    "ProviderKey" text NOT NULL,
+    "ProviderDisplayName" text,
+    "UserId" text NOT NULL,
+    CONSTRAINT "PK_AspNetUserLogins" PRIMARY KEY ("LoginProvider", "ProviderKey"),
+    CONSTRAINT "FK_AspNetUserLogins_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:58:18.904 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserRoles" (
+    "UserId" text NOT NULL,
+    "RoleId" text NOT NULL,
+    CONSTRAINT "PK_AspNetUserRoles" PRIMARY KEY ("UserId", "RoleId"),
+    CONSTRAINT "FK_AspNetUserRoles_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_AspNetUserRoles_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:58:18.907 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserTokens" (
+    "UserId" text NOT NULL,
+    "LoginProvider" text NOT NULL,
+    "Name" text NOT NULL,
+    "Value" text,
+    CONSTRAINT "PK_AspNetUserTokens" PRIMARY KEY ("UserId", "LoginProvider", "Name"),
+    CONSTRAINT "FK_AspNetUserTokens_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:58:18.910 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserProfiles" (
+    "Id" text NOT NULL,
+    "UserId" text NOT NULL,
+    "Username" text NOT NULL,
+    "Bio" text,
+    "ProfilePhotoUrl" text,
+    "Links" text[] NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "UpdatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_UserProfiles" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_UserProfiles_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-04-17 11:58:18.911 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetRoleClaims_RoleId" ON "AspNetRoleClaims" ("RoleId");
+2025-04-17 11:58:18.912 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "RoleNameIndex" ON "AspNetRoles" ("NormalizedName");
+2025-04-17 11:58:18.913 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserClaims_UserId" ON "AspNetUserClaims" ("UserId");
+2025-04-17 11:58:18.914 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserLogins_UserId" ON "AspNetUserLogins" ("UserId");
+2025-04-17 11:58:18.915 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserRoles_RoleId" ON "AspNetUserRoles" ("RoleId");
+2025-04-17 11:58:18.916 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "EmailIndex" ON "AspNetUsers" ("NormalizedEmail");
+2025-04-17 11:58:18.917 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "UserNameIndex" ON "AspNetUsers" ("NormalizedUserName");
+2025-04-17 11:58:18.918 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_UserProfiles_UserId" ON "UserProfiles" ("UserId");
+2025-04-17 11:58:18.919 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250417105813_InitailCreate1', '8.0.8');
+2025-04-17 11:59:53.159 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-17 11:59:53.264 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-17 11:59:53.267 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-17 11:59:53.296 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 11:59:53.299 +01:00 [INF] Hosting environment: Development
+2025-04-17 11:59:53.301 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-17 11:59:53.479 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 11:59:53.576 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 97.6424ms
+2025-04-17 11:59:53.581 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 11:59:53.581 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 11:59:53.581 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 11:59:53.587 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 6.0044ms
+2025-04-17 11:59:53.594 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 12.6785ms
+2025-04-17 11:59:53.610 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 28.9315ms
+2025-04-17 11:59:53.678 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 11:59:53.687 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 8.9902ms
+2025-04-17 11:59:54.112 +01:00 [INF] Executed DbCommand (32ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 11:59:54.131 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 11:59:54.214 +01:00 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?', @p1='?', @p2='?', @p3='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetRoles" ("Id", "ConcurrencyStamp", "Name", "NormalizedName")
+VALUES (@p0, @p1, @p2, @p3);
+2025-04-17 11:59:54.224 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 11:59:54.227 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 11:59:54.231 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?', @p1='?', @p2='?', @p3='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetRoles" ("Id", "ConcurrencyStamp", "Name", "NormalizedName")
+VALUES (@p0, @p1, @p2, @p3);
+2025-04-17 11:59:57.346 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 11:59:57.353 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 7.073ms
+2025-04-17 11:59:57.359 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 11:59:57.359 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 11:59:57.359 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 11:59:57.361 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 2.4918ms
+2025-04-17 11:59:57.366 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 7.2045ms
+2025-04-17 11:59:57.371 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 12.5548ms
+2025-04-17 11:59:57.424 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 11:59:57.429 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 5.0173ms
+2025-04-17 12:00:21.362 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 12:00:21.367 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 4.9117ms
+2025-04-17 12:00:21.373 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 12:00:21.373 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 12:00:21.373 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 12:00:21.376 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 2.506ms
+2025-04-17 12:00:21.378 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 5.0552ms
+2025-04-17 12:00:21.383 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 9.6436ms
+2025-04-17 12:00:21.427 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 12:00:21.433 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 6.5541ms
+2025-04-17 12:00:29.830 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 12:00:29.836 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 5.7863ms
+2025-04-17 12:00:29.843 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 12:00:29.843 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 12:00:29.843 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 12:00:29.846 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 3.0226ms
+2025-04-17 12:00:29.849 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 5.7004ms
+2025-04-17 12:00:29.855 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 11.3625ms
+2025-04-17 12:00:29.899 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 12:00:29.905 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 6.2636ms
+2025-04-17 12:00:33.504 +01:00 [INF] Application is shutting down...
+2025-04-17 12:00:39.315 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-17 12:00:39.414 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-17 12:00:39.417 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-17 12:00:39.446 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 12:00:39.448 +01:00 [INF] Hosting environment: Development
+2025-04-17 12:00:39.449 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-17 12:00:39.701 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 12:00:39.797 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 97.0624ms
+2025-04-17 12:00:39.803 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 12:00:39.803 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 12:00:39.803 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 12:00:39.812 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 8.9467ms
+2025-04-17 12:00:39.813 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 10.227ms
+2025-04-17 12:00:39.825 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 22.1081ms
+2025-04-17 12:00:39.855 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 12:00:39.862 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 7.3806ms
+2025-04-17 12:00:40.252 +01:00 [INF] Executed DbCommand (32ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 12:00:40.300 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 12:01:13.240 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7227/api/Auth/register - application/json 90
+2025-04-17 12:01:13.247 +01:00 [INF] CORS policy execution successful.
+2025-04-17 12:01:13.263 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.Register (AnimeApp.API)'
+2025-04-17 12:01:13.276 +01:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(AnimeApp.Core.Models.RegisterModel) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-17 12:01:13.403 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-04-17 12:01:13.495 +01:00 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?', @p1='?' (DbType = Int32), @p2='?', @p3='?', @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTime), @p7='?', @p8='?', @p9='?', @p10='?', @p11='?' (DbType = Boolean), @p12='?', @p13='?' (DbType = Boolean), @p14='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetUsers" ("Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2025-04-17 12:01:13.510 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-04-17 12:01:13.526 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-04-17 12:01:13.532 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-04-17 12:01:13.542 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-04-17 12:01:13.562 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?', @p1='?', @p16='?', @p2='?' (DbType = Int32), @p3='?', @p17='?', @p4='?', @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTime), @p8='?', @p9='?', @p10='?', @p11='?', @p12='?' (DbType = Boolean), @p13='?', @p14='?' (DbType = Boolean), @p15='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetUserRoles" ("RoleId", "UserId")
+VALUES (@p0, @p1);
+UPDATE "AspNetUsers" SET "AccessFailedCount" = @p2, "ConcurrencyStamp" = @p3, "Email" = @p4, "EmailConfirmed" = @p5, "LockoutEnabled" = @p6, "LockoutEnd" = @p7, "NormalizedEmail" = @p8, "NormalizedUserName" = @p9, "PasswordHash" = @p10, "PhoneNumber" = @p11, "PhoneNumberConfirmed" = @p12, "SecurityStamp" = @p13, "TwoFactorEnabled" = @p14, "UserName" = @p15
+WHERE "Id" = @p16 AND "ConcurrencyStamp" = @p17;
+2025-04-17 12:01:13.633 +01:00 [INF] Executed DbCommand (38ms) [Parameters=[@p0='?', @p1='?', @p2='?' (DbType = DateTime), @p3='?' (DbType = Object), @p4='?', @p5='?' (DbType = DateTime), @p6='?', @p7='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "UserProfiles" ("Id", "Bio", "CreatedAt", "Links", "ProfilePhotoUrl", "UpdatedAt", "UserId", "Username")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2025-04-17 12:01:13.640 +01:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-04-17 12:01:13.644 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.Register (AnimeApp.API) in 364.5809ms
+2025-04-17 12:01:13.646 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.Register (AnimeApp.API)'
+2025-04-17 12:01:13.653 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7227/api/Auth/register - 200 null application/json; charset=utf-8 412.913ms
+2025-04-17 12:01:59.604 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7227/api/Auth/login - application/json 64
+2025-04-17 12:01:59.609 +01:00 [INF] CORS policy execution successful.
+2025-04-17 12:01:59.612 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.Login (AnimeApp.API)'
+2025-04-17 12:01:59.617 +01:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AnimeApp.Core.Models.LoginModel) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-17 12:01:59.638 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-04-17 12:01:59.733 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?', @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-04-17 12:01:59.736 +01:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-04-17 12:01:59.738 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.Login (AnimeApp.API) in 119.4797ms
+2025-04-17 12:01:59.740 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.Login (AnimeApp.API)'
+2025-04-17 12:01:59.740 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7227/api/Auth/login - 200 null application/json; charset=utf-8 136.5566ms
+2025-04-17 12:02:30.552 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7227/api/Auth/login - application/json 65
+2025-04-17 12:02:30.557 +01:00 [INF] CORS policy execution successful.
+2025-04-17 12:02:30.560 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.Login (AnimeApp.API)'
+2025-04-17 12:02:30.562 +01:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AnimeApp.Core.Models.LoginModel) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-17 12:02:30.573 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-04-17 12:02:30.637 +01:00 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-04-17 12:02:30.639 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.Login (AnimeApp.API) in 74.9095ms
+2025-04-17 12:02:30.641 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.Login (AnimeApp.API)'
+2025-04-17 12:02:30.642 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7227/api/Auth/login - 401 null application/json; charset=utf-8 89.3739ms
+2025-04-17 12:02:42.026 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7227/api/Auth/login - application/json 64
+2025-04-17 12:02:42.030 +01:00 [INF] CORS policy execution successful.
+2025-04-17 12:02:42.031 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.Login (AnimeApp.API)'
+2025-04-17 12:02:42.032 +01:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AnimeApp.Core.Models.LoginModel) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-17 12:02:42.035 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-04-17 12:02:42.100 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?', @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-04-17 12:02:42.102 +01:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-04-17 12:02:42.103 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.Login (AnimeApp.API) in 69.8097ms
+2025-04-17 12:02:42.105 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.Login (AnimeApp.API)'
+2025-04-17 12:02:42.105 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7227/api/Auth/login - 200 null application/json; charset=utf-8 79.5507ms
+2025-04-17 12:03:30.016 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7227/api/Auth/refresh - application/json 60
+2025-04-17 12:03:30.020 +01:00 [INF] CORS policy execution successful.
+2025-04-17 12:03:30.021 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.Refresh (AnimeApp.API)'
+2025-04-17 12:03:30.024 +01:00 [INF] Route matched with {action = "Refresh", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Refresh(AnimeApp.Core.Models.RefreshTokenModel) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-17 12:03:30.042 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__model_RefreshToken_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT r."Id", r."Expires", r."IsRevoked", r."Token", r."UserId"
+FROM "RefreshTokens" AS r
+WHERE r."Token" = @__model_RefreshToken_0 AND NOT (r."IsRevoked") AND r."Expires" > now()
+LIMIT 1
+2025-04-17 12:03:30.051 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."Id" = @__p_0
+LIMIT 1
+2025-04-17 12:03:30.056 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?', @p0='?' (DbType = Boolean), @p2='?', @p3='?' (DbType = DateTime), @p4='?' (DbType = Boolean), @p5='?', @p6='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "RefreshTokens" SET "IsRevoked" = @p0
+WHERE "Id" = @p1;
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserId")
+VALUES (@p2, @p3, @p4, @p5, @p6);
+2025-04-17 12:03:30.058 +01:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-04-17 12:03:30.060 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.Refresh (AnimeApp.API) in 33.9756ms
+2025-04-17 12:03:30.061 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.Refresh (AnimeApp.API)'
+2025-04-17 12:03:30.062 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7227/api/Auth/refresh - 200 null application/json; charset=utf-8 45.9372ms
+2025-04-17 12:04:32.926 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/Auth/admin - null null
+2025-04-17 12:04:32.933 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2025-04-17 12:04:32.937 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2025-04-17 12:04:32.938 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/Auth/admin - 401 0 null 11.4653ms
+2025-04-17 12:05:25.311 +01:00 [INF] Application is shutting down...
+2025-04-17 14:57:57.410 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-17 14:57:57.515 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-17 14:57:57.518 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-17 14:57:57.548 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 14:57:57.550 +01:00 [INF] Hosting environment: Development
+2025-04-17 14:57:57.551 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-17 14:57:58.206 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 14:57:58.303 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 97.8733ms
+2025-04-17 14:57:58.309 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 14:57:58.309 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 14:57:58.309 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 14:57:58.313 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 3.3967ms
+2025-04-17 14:57:58.323 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 13.6913ms
+2025-04-17 14:57:58.334 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 24.7315ms
+2025-04-17 14:57:58.355 +01:00 [INF] Executed DbCommand (40ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 14:57:58.407 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 14:57:58.457 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 14:57:58.467 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 9.4647ms
+2025-04-17 14:59:12.381 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/Auth/google-callback?returnUrl=%2Fsignin-google - null null
+2025-04-17 14:59:12.405 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API)'
+2025-04-17 14:59:12.418 +01:00 [INF] Route matched with {action = "GoogleCallback", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GoogleCallback(System.String, System.String) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-17 14:59:12.437 +01:00 [INF] Executing BadRequestObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-04-17 14:59:12.444 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API) in 21.7343ms
+2025-04-17 14:59:12.445 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API)'
+2025-04-17 14:59:12.447 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/Auth/google-callback?returnUrl=%2Fsignin-google - 400 null application/json; charset=utf-8 65.8703ms
+2025-04-17 15:00:49.745 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/auth/google-login' - null null
+2025-04-17 15:00:49.756 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/auth/google-login' - 404 0 null 11.5166ms
+2025-04-17 15:00:49.760 +01:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7227/api/auth/google-login', Response status code: 404
+2025-04-17 15:00:53.157 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/auth/google-login - null null
+2025-04-17 15:00:53.162 +01:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-04-17 15:00:53.163 +01:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-04-17 15:00:53.164 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/auth/google-login - 405 0 null 7.464ms
+2025-04-17 15:01:36.880 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/auth/google-callback - null null
+2025-04-17 15:01:36.884 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API)'
+2025-04-17 15:01:36.885 +01:00 [INF] Route matched with {action = "GoogleCallback", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GoogleCallback(System.String, System.String) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-17 15:01:36.896 +01:00 [INF] Executing BadRequestObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-04-17 15:01:36.898 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API) in 10.6682ms
+2025-04-17 15:01:36.899 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API)'
+2025-04-17 15:01:36.900 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/auth/google-callback - 400 null application/json; charset=utf-8 20.3912ms
+2025-04-17 15:01:36.931 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/favicon.ico - null null
+2025-04-17 15:01:36.933 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/favicon.ico - 404 0 null 2.6565ms
+2025-04-17 15:01:36.936 +01:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7227/favicon.ico, Response status code: 404
+2025-04-17 15:04:11.538 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 15:04:11.543 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 5.4993ms
+2025-04-17 15:04:11.550 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 15:04:11.550 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 15:04:11.551 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 15:04:11.553 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 2.5725ms
+2025-04-17 15:04:11.555 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 4.4679ms
+2025-04-17 15:04:11.565 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 14.2644ms
+2025-04-17 15:04:11.698 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 15:04:11.705 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 6.6856ms
+2025-04-17 15:04:24.580 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/Auth/google-callback?returnUrl=%2F - null null
+2025-04-17 15:04:24.583 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API)'
+2025-04-17 15:04:24.585 +01:00 [INF] Route matched with {action = "GoogleCallback", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GoogleCallback(System.String, System.String) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-17 15:04:24.598 +01:00 [INF] Executing BadRequestObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-04-17 15:04:24.600 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API) in 12.1891ms
+2025-04-17 15:04:24.601 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API)'
+2025-04-17 15:04:24.602 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/Auth/google-callback?returnUrl=%2F - 400 null application/json; charset=utf-8 22.8123ms
+2025-04-17 15:04:55.299 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/auth/google-login - null null
+2025-04-17 15:04:55.304 +01:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-04-17 15:04:55.305 +01:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-04-17 15:04:55.307 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/auth/google-login - 405 0 null 7.1885ms
+2025-04-17 15:04:58.754 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/auth/google-login - null null
+2025-04-17 15:04:58.757 +01:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-04-17 15:04:58.758 +01:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-04-17 15:04:58.760 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/auth/google-login - 405 0 null 6.14ms
+2025-04-17 15:43:47.707 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-17 15:43:47.808 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-17 15:43:47.810 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-17 15:43:47.842 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 15:43:47.845 +01:00 [INF] Hosting environment: Development
+2025-04-17 15:43:47.846 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-17 15:43:48.014 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 15:43:48.112 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 98.0852ms
+2025-04-17 15:43:48.121 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 15:43:48.121 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 15:43:48.121 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 15:43:48.129 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 8.6355ms
+2025-04-17 15:43:48.132 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 11.2983ms
+2025-04-17 15:43:48.156 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 35.3664ms
+2025-04-17 15:43:48.186 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 15:43:48.195 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 9.3226ms
+2025-04-17 15:43:48.677 +01:00 [INF] Executed DbCommand (33ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 15:43:48.725 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 15:44:05.266 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 15:44:05.271 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 4.7725ms
+2025-04-17 15:44:05.278 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 15:44:05.278 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 15:44:05.278 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 15:44:05.280 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 2.3748ms
+2025-04-17 15:44:05.282 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 4.5215ms
+2025-04-17 15:44:05.292 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 13.8982ms
+2025-04-17 15:44:05.349 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 15:44:05.355 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 5.9037ms
+2025-04-17 15:44:14.505 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7227/api/Auth/google-login?returnUrl=%2F - null 0
+2025-04-17 15:44:14.512 +01:00 [INF] CORS policy execution successful.
+2025-04-17 15:44:14.530 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.GoogleLogin (AnimeApp.API)'
+2025-04-17 15:44:14.541 +01:00 [INF] Route matched with {action = "GoogleLogin", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GoogleLogin(System.String) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-17 15:44:14.564 +01:00 [INF] Executing ChallengeResult with authentication schemes (["Google"]).
+2025-04-17 15:44:14.574 +01:00 [INF] AuthenticationScheme: Google was challenged.
+2025-04-17 15:44:14.577 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.GoogleLogin (AnimeApp.API) in 31.6594ms
+2025-04-17 15:44:14.578 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.GoogleLogin (AnimeApp.API)'
+2025-04-17 15:44:14.580 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7227/api/Auth/google-login?returnUrl=%2F - 302 0 null 75.29ms
+2025-04-17 15:44:26.500 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/Auth/google-callback?returnUrl=%2F - null null
+2025-04-17 15:44:26.508 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API)'
+2025-04-17 15:44:26.513 +01:00 [INF] Route matched with {action = "GoogleCallback", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GoogleCallback(System.String, System.String) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-17 15:44:26.522 +01:00 [ERR] Failed to retrieve Google login info. QueryString: ?returnUrl=%2F
+2025-04-17 15:44:26.526 +01:00 [INF] Executing BadRequestObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-04-17 15:44:26.531 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API) in 16.1994ms
+2025-04-17 15:44:26.533 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API)'
+2025-04-17 15:44:26.534 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/Auth/google-callback?returnUrl=%2F - 400 null application/json; charset=utf-8 34.3044ms
+2025-04-17 16:23:41.811 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7227/api/Auth/google-login?returnUrl=%2F - null 0
+2025-04-17 16:23:41.814 +01:00 [INF] CORS policy execution successful.
+2025-04-17 16:23:41.815 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.GoogleLogin (AnimeApp.API)'
+2025-04-17 16:23:41.816 +01:00 [INF] Route matched with {action = "GoogleLogin", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GoogleLogin(System.String) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-17 16:23:41.827 +01:00 [INF] Executing ChallengeResult with authentication schemes (["Google"]).
+2025-04-17 16:23:41.829 +01:00 [INF] AuthenticationScheme: Google was challenged.
+2025-04-17 16:23:41.830 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.GoogleLogin (AnimeApp.API) in 11.9037ms
+2025-04-17 16:23:41.831 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.GoogleLogin (AnimeApp.API)'
+2025-04-17 16:23:41.831 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7227/api/Auth/google-login?returnUrl=%2F - 302 0 null 20.7299ms
+2025-04-17 16:26:26.194 +01:00 [INF] Application is shutting down...
+2025-04-17 20:24:59.700 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-17 20:24:59.844 +01:00 [FTL] Application startup exception
+System.InvalidOperationException: Scheme already exists: Identity.External
+   at Microsoft.AspNetCore.Authentication.AuthenticationOptions.AddScheme(String name, Action`1 configureBuilder)
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at Microsoft.Extensions.Options.UnnamedOptionsManager`1.get_Value()
+   at Microsoft.AspNetCore.Authentication.AuthenticationSchemeProvider..ctor(IOptions`1 options, IDictionary`2 schemes)
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.ConstructorMatcher.CreateInstance(IServiceProvider provider)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.ReflectionMiddlewareBinder.CreateMiddleware(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2025-04-17 20:24:59.881 +01:00 [ERR] Hosting failed to start
+System.InvalidOperationException: Scheme already exists: Identity.External
+   at Microsoft.AspNetCore.Authentication.AuthenticationOptions.AddScheme(String name, Action`1 configureBuilder)
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at Microsoft.Extensions.Options.UnnamedOptionsManager`1.get_Value()
+   at Microsoft.AspNetCore.Authentication.AuthenticationSchemeProvider..ctor(IOptions`1 options, IDictionary`2 schemes)
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.ConstructorMatcher.CreateInstance(IServiceProvider provider)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.ReflectionMiddlewareBinder.CreateMiddleware(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2025-04-17 20:25:15.405 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-17 20:25:15.508 +01:00 [FTL] Application startup exception
+System.InvalidOperationException: Scheme already exists: Identity.External
+   at Microsoft.AspNetCore.Authentication.AuthenticationOptions.AddScheme(String name, Action`1 configureBuilder)
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at Microsoft.Extensions.Options.UnnamedOptionsManager`1.get_Value()
+   at Microsoft.AspNetCore.Authentication.AuthenticationSchemeProvider..ctor(IOptions`1 options, IDictionary`2 schemes)
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.ConstructorMatcher.CreateInstance(IServiceProvider provider)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.ReflectionMiddlewareBinder.CreateMiddleware(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2025-04-17 20:25:15.526 +01:00 [ERR] Hosting failed to start
+System.InvalidOperationException: Scheme already exists: Identity.External
+   at Microsoft.AspNetCore.Authentication.AuthenticationOptions.AddScheme(String name, Action`1 configureBuilder)
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at Microsoft.Extensions.Options.UnnamedOptionsManager`1.get_Value()
+   at Microsoft.AspNetCore.Authentication.AuthenticationSchemeProvider..ctor(IOptions`1 options, IDictionary`2 schemes)
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.ConstructorMatcher.CreateInstance(IServiceProvider provider)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.ReflectionMiddlewareBinder.CreateMiddleware(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2025-04-17 20:26:52.704 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-17 20:26:52.883 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-17 20:26:52.887 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-17 20:26:52.938 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 20:26:52.942 +01:00 [INF] Hosting environment: Development
+2025-04-17 20:26:52.944 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-17 20:26:53.444 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 20:26:53.645 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 201.9479ms
+2025-04-17 20:26:53.653 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 20:26:53.653 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 20:26:53.665 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 20:26:53.669 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 15.747ms
+2025-04-17 20:26:53.671 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 17.7499ms
+2025-04-17 20:26:53.720 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 55.3775ms
+2025-04-17 20:26:53.790 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 20:26:53.807 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 16.8775ms
+2025-04-17 20:26:54.882 +01:00 [INF] Executed DbCommand (63ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 20:26:54.973 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 20:27:06.952 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7227/api/Auth/google-login?returnUrl=%2F - null 0
+2025-04-17 20:27:06.985 +01:00 [INF] CORS policy execution successful.
+2025-04-17 20:27:06.997 +01:00 [INF] Redirecting uppercase URL /api/Auth/google-login to lowercase /api/auth/google-login
+2025-04-17 20:27:07.015 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7227/api/Auth/google-login?returnUrl=%2F - 302 0 null 62.6142ms
+2025-04-17 20:27:07.020 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/auth/google-login?returnUrl=%2F - null null
+2025-04-17 20:27:07.087 +01:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-04-17 20:27:07.091 +01:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-04-17 20:27:07.092 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/auth/google-login?returnUrl=%2F - 405 0 null 72.6238ms
+2025-04-17 20:27:37.212 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/Auth/google-callback?returnUrl=%2F - null null
+2025-04-17 20:27:37.231 +01:00 [INF] Redirecting uppercase URL /api/Auth/google-callback to lowercase /api/auth/google-callback
+2025-04-17 20:27:37.241 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/Auth/google-callback?returnUrl=%2F - 302 0 null 29.2335ms
+2025-04-17 20:27:37.246 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/auth/google-callback?returnUrl=%2F - null null
+2025-04-17 20:27:37.264 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API)'
+2025-04-17 20:27:37.290 +01:00 [INF] Route matched with {action = "GoogleCallback", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GoogleCallback(System.String, System.String) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-17 20:27:37.329 +01:00 [ERR] Failed to retrieve Google login info. QueryString: ?returnUrl=%2F
+2025-04-17 20:27:37.338 +01:00 [INF] Executing BadRequestObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-04-17 20:27:37.350 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API) in 50.7058ms
+2025-04-17 20:27:37.354 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API)'
+2025-04-17 20:27:37.356 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/auth/google-callback?returnUrl=%2F - 400 null application/json; charset=utf-8 110.246ms
+2025-04-17 20:28:01.367 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/Auth/google-callback? - null null
+2025-04-17 20:28:01.376 +01:00 [INF] Redirecting uppercase URL /api/Auth/google-callback to lowercase /api/auth/google-callback
+2025-04-17 20:28:01.380 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/Auth/google-callback? - 302 0 null 12.4587ms
+2025-04-17 20:28:01.383 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/auth/google-callback? - null null
+2025-04-17 20:28:01.392 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API)'
+2025-04-17 20:28:01.394 +01:00 [INF] Route matched with {action = "GoogleCallback", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GoogleCallback(System.String, System.String) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-17 20:28:01.402 +01:00 [ERR] Failed to retrieve Google login info. QueryString: ?
+2025-04-17 20:28:01.415 +01:00 [INF] Executing BadRequestObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-04-17 20:28:01.419 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API) in 21.332ms
+2025-04-17 20:28:01.423 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API)'
+2025-04-17 20:28:01.425 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/auth/google-callback? - 400 null application/json; charset=utf-8 42.3465ms
+2025-04-17 20:28:01.478 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/favicon.ico - null null
+2025-04-17 20:28:01.485 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/favicon.ico - 404 0 null 6.9768ms
+2025-04-17 20:28:01.492 +01:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7227/favicon.ico, Response status code: 404
+2025-04-17 21:20:35.539 +01:00 [INF] User profile is available. Using 'C:\Users\ctrl-f2-dev-1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-04-17 21:20:35.682 +01:00 [INF] Now listening on: https://localhost:7227
+2025-04-17 21:20:35.685 +01:00 [INF] Now listening on: http://localhost:5216
+2025-04-17 21:20:35.727 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 21:20:35.731 +01:00 [INF] Hosting environment: Development
+2025-04-17 21:20:35.733 +01:00 [INF] Content root path: C:\Users\ctrl-f2-dev-1\project\AnimeApp.API
+2025-04-17 21:20:36.276 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.html - null null
+2025-04-17 21:20:36.438 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.html - 200 null text/html;charset=utf-8 163.4703ms
+2025-04-17 21:20:36.448 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/index.js - null null
+2025-04-17 21:20:36.448 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-17 21:20:36.454 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/_vs/browserLink - null null
+2025-04-17 21:20:36.455 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/index.js - 200 null application/javascript;charset=utf-8 6.904ms
+2025-04-17 21:20:36.467 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_framework/aspnetcore-browser-refresh.js - 200 13776 application/javascript; charset=utf-8 18.7774ms
+2025-04-17 21:20:36.494 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/_vs/browserLink - 200 null text/javascript; charset=UTF-8 40.857ms
+2025-04-17 21:20:36.681 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - null null
+2025-04-17 21:20:36.697 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 15.6905ms
+2025-04-17 21:20:37.003 +01:00 [INF] Executed DbCommand (55ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 21:20:37.078 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-04-17 21:20:50.159 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7227/api/Auth/google-login?returnUrl=%2F - null 0
+2025-04-17 21:20:50.170 +01:00 [INF] CORS policy execution successful.
+2025-04-17 21:20:50.174 +01:00 [INF] Processing request: Method=POST, Path=/api/Auth/google-login, Query=?returnUrl=%2F
+2025-04-17 21:20:50.182 +01:00 [INF] Redirecting uppercase URL /api/Auth/google-login to lowercase /api/auth/google-login for POST
+2025-04-17 21:20:50.186 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7227/api/Auth/google-login?returnUrl=%2F - 307 0 null 27.4607ms
+2025-04-17 21:20:50.188 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7227/api/auth/google-login?returnUrl=%2F - null 0
+2025-04-17 21:20:50.198 +01:00 [INF] CORS policy execution successful.
+2025-04-17 21:20:50.199 +01:00 [INF] Processing request: Method=POST, Path=/api/auth/google-login, Query=?returnUrl=%2F
+2025-04-17 21:20:50.228 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.GoogleLogin (AnimeApp.API)'
+2025-04-17 21:20:50.244 +01:00 [INF] Route matched with {action = "GoogleLogin", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GoogleLogin(System.String) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-17 21:20:50.264 +01:00 [INF] GoogleLogin called: Method=POST, ReturnUrl=/, Origin=["https://localhost:7227"]
+2025-04-17 21:20:50.293 +01:00 [INF] Initiating Google OAuth flow with redirect: https://localhost:7227/api/Auth/google-callback?returnUrl=%2F, Origin: ["https://localhost:7227"]
+2025-04-17 21:20:50.299 +01:00 [INF] Executing ChallengeResult with authentication schemes (["Google"]).
+2025-04-17 21:20:50.311 +01:00 [INF] AuthenticationScheme: Google was challenged.
+2025-04-17 21:20:50.319 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.GoogleLogin (AnimeApp.API) in 67.0546ms
+2025-04-17 21:20:50.321 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.GoogleLogin (AnimeApp.API)'
+2025-04-17 21:20:50.325 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7227/api/auth/google-login?returnUrl=%2F - 302 0 null 136.9541ms
+2025-04-17 21:21:02.699 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/Auth/google-callback?returnUrl=%2F - null null
+2025-04-17 21:21:02.714 +01:00 [INF] Processing request: Method=GET, Path=/api/Auth/google-callback, Query=?returnUrl=%2F
+2025-04-17 21:21:02.718 +01:00 [INF] Redirecting uppercase URL /api/Auth/google-callback to lowercase /api/auth/google-callback for GET
+2025-04-17 21:21:02.720 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/Auth/google-callback?returnUrl=%2F - 302 0 null 20.7476ms
+2025-04-17 21:21:02.722 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7227/api/auth/google-callback?returnUrl=%2F - null null
+2025-04-17 21:21:02.730 +01:00 [INF] Processing request: Method=GET, Path=/api/auth/google-callback, Query=?returnUrl=%2F
+2025-04-17 21:21:02.734 +01:00 [INF] Executing endpoint 'AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API)'
+2025-04-17 21:21:02.743 +01:00 [INF] Route matched with {action = "GoogleCallback", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GoogleCallback(System.String, System.String) on controller AnimeApp.API.Controllers.AuthController (AnimeApp.API).
+2025-04-17 21:21:02.754 +01:00 [INF] GoogleCallback called: ReturnUrl=/, RemoteError=null, QueryString=?returnUrl=%2F, Origin=[]
+2025-04-17 21:21:02.760 +01:00 [ERR] Failed to retrieve Google login info. QueryString: ?returnUrl=%2F, Origin: []
+2025-04-17 21:21:02.768 +01:00 [INF] Executing BadRequestObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-04-17 21:21:02.775 +01:00 [INF] Executed action AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API) in 29.7844ms
+2025-04-17 21:21:02.779 +01:00 [INF] Executed endpoint 'AnimeApp.API.Controllers.AuthController.GoogleCallback (AnimeApp.API)'
+2025-04-17 21:21:02.781 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7227/api/auth/google-callback?returnUrl=%2F - 400 null application/json; charset=utf-8 59.7682ms
+2025-04-17 22:26:27.614 +01:00 [INF] Application is shutting down...
